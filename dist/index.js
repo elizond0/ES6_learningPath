@@ -2,7 +2,7 @@
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-// 2.变量的解构赋值
+// ## 2.变量的解构赋值(ES6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构。)
 // 简单例子
 {
     var a = 1,
@@ -58,7 +58,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
     }
 }
 
-// 3.扩展运算符和rest运算符
+// ## 3.扩展运算符和rest运算符
 // 对象扩展运算符
 function test1() {
     // console.log(""+arg[0]+arg[1]+arg[2]+arg[3]);//123undefined
@@ -117,7 +117,7 @@ function test2(a) {
 }
 test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 
-// 字符串模版
+// ## 4.字符串模版
 {
     var text = 'text';
     var text1 = 'text1';
@@ -130,7 +130,7 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     // console.log(text.repeat(3))//texttexttext
 }
 
-// 数字操作 
+// ## 5.数字操作
 {
     // 二进制声明 Binary
     var binary = 21;
@@ -154,7 +154,7 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     // console.log(Number.isInteger(number2+1))//true
 }
 
-// 数组
+// ## 6.数组操作
 {
     // json数组格式
     var json = {
@@ -165,26 +165,25 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 
         // json对象的数组格式转化为数组 Array.from
     };var arr = Array.from(json);
-    console.log(json); //默认是对象
-    console.log(arr); //转成了数组["abc", "def", "ghi"]
+    // console.log(json)//默认是对象
+    // console.log(arr)//转成了数组["abc", "def", "ghi"]
     // 将文本和变量转换成数组 Array.of
     var txt = '2';
     var _arr3 = Array.of(txt, txt, txt, txt);
-    console.log(_arr3); //["2", "2", "2", "2"]
+    // console.log(arr1)//["2", "2", "2", "2"]
     var txt2 = '2,2,2,2';
     var _arr4 = txt2.split(',');
-    console.log(_arr4); //["2", "2", "2", "2"]
+    // console.log(arr2)//["2", "2", "2", "2"]
     // 数组的实例方法,实例方法就是调用挂载在数组实例下的方法
     // find() 查找
     var arr3 = [1, 2, 3, 4, 5, 6];
-    console.log(arr3.find(function (value, index, arr) {
-        //当前值,当前值的索引,当前数组
-        return value > 3; //匹配到第一个就返回并中止
-    })); // 4
+    // console.log(arr3.find(function(value,index,arr){//当前值,当前值的索引,当前数组
+    //     return value>3//匹配到第一个就返回并中止
+    // }))// 4
     // fill() 可以替换多个项 参数:要替换的元素,开始的位置,结束的位置 
     var arr4 = [1, 2, 3, 4, 5, 6];
     arr4.fill('100', 2, -1);
-    console.log(arr4); //[1, 2, "100", "100", "100", 6]
+    // console.log(arr4)//[1, 2, "100", "100", "100", 6]
     // 数组循环 for...of
     var arr5 = [1, 2, 3, 4, 5, 6];
     var _iteratorNormalCompletion2 = true;
@@ -193,11 +192,11 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 
     try {
         for (var _iterator2 = arr5.entries()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            // console.log(index+":"+val)//0:1 ... 5:6
+
             var _step2$value = _slicedToArray(_step2.value, 2),
                 index = _step2$value[0],
                 val = _step2$value[1];
-
-            console.log(index + ":" + val); //0:1 ... 5:6
         }
     } catch (err) {
         _didIteratorError2 = true;
@@ -215,7 +214,15 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     }
 
     var list = arr5.entries();
-    console.log(list); //Array Iterator {}
-    console.log(list.next().value); //[0, 1]
-    console.log(list.next().value); //[1, 2]
+    // console.log(list);//Array Iterator {}
+    // console.log(list.next().value)//[0, 1]
+    // console.log(list.next().value)//[1, 2]
 }
+
+// ## 7.箭头函数
+var test = function test(a) {
+    var b = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
+    return a + b;
+};
+console.log(test(1)); //2
