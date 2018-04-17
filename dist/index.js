@@ -1,5 +1,6 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 // 2.变量的解构赋值
@@ -123,9 +124,33 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     var text1 = 'text1';
     var number1 = 1000000;
     var text2 = '<b>text2</b>+' + text1 + '+<small style=\'color:red\'>text2</small>+' + (number1 + 10);
-    document.write(text2);
+    // document.write(text2)
     // console.log(text2.includes(text)) //true
     // console.log(text2.startsWith(text)) //false
     // console.log(text2.endsWith(text)) //false
     // console.log(text.repeat(3))//texttexttext
+}
+
+// 数字操作 
+{
+    // 二进制声明 Binary
+    var binary = 21;
+    console.log(binary); //21
+    // 八进制 Octal
+    var octal = 438;
+    console.log(octal); //438
+    // 检测是否是有穷数,除了infinity,以外的所有数字,与全局的isFinite相比,不会强制转换
+    console.log(Number.isFinite(11 / 4)); //true
+    console.log(Number.isFinite(Infinity)); //false
+    console.log(typeof Infinity === 'undefined' ? 'undefined' : _typeof(Infinity)); //number
+    // 检测是否是整数 int
+    console.log(Number.isInteger(111)); // true
+    console.log(Number.isInteger(Math.PI)); // false
+    console.log(Number.isInteger(Infinity)); // false
+    // 最大安全整数,安全整数的意思是在此范围内可以精确表示,IEEE754双精确浮点数定义
+    // let number2=Math.pow(2,53)-1
+    var number2 = Number.MAX_SAFE_INTEGER;
+    console.log(number2); ////9007199254740991
+    console.log(Number.isSafeInteger(number2 + 1));
+    console.log(Number.isInteger(number2 + 1));
 }

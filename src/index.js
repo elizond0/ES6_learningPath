@@ -80,9 +80,34 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
     let text1 = 'text1'
     let number1 = 1000000
     let text2 = `<b>text2</b>+${text1}+<small style='color:red'>text2</small>+${number1+10}`
-    document.write(text2)
+    // document.write(text2)
     // console.log(text2.includes(text)) //true
     // console.log(text2.startsWith(text)) //false
     // console.log(text2.endsWith(text)) //false
     // console.log(text.repeat(3))//texttexttext
+}
+
+// 数字操作 
+{
+    // 二进制声明 Binary
+    let binary=0b010101
+    console.log(binary)//21
+    // 八进制 Octal
+    let octal=0o666;
+    console.log(octal)//438
+    // 检测是否是有穷数,除了infinity,以外的所有数字,与全局的isFinite相比,不会强制转换
+    console.log(Number.isFinite(11/4))//true
+    console.log(Number.isFinite(Infinity))//false
+    console.log(typeof(Infinity))//number
+    // 检测是否是整数 int
+    console.log(Number.isInteger(111))// true
+    console.log(Number.isInteger(Math.PI))// false
+    console.log(Number.isInteger(Infinity))// false
+    // 最大安全整数,安全整数的意思是在此范围内可以精确表示,IEEE754双精确浮点数定义
+    // let number2=Math.pow(2,53)-1 //最大安全整数
+    let number2=Number.MAX_SAFE_INTEGER
+    console.log(number2)////9007199254740991
+    console.log(Number.isSafeInteger(number2+1))//false
+    console.log(Number.isInteger(number2+1))//true
+
 }
