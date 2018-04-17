@@ -55,19 +55,46 @@ test2(1,2,3,4,5,6,7,8,9,0)
 
 ## 5.数字操作
 //检测是否是有穷数,除了infinity,以外的所有数字,与全局的isFinite相比,不会强制转换
-console.log(Number.isFinite(11/4))//true
-console.log(Number.isFinite(Infinity))//false
-console.log(typeof(Infinity))//number
+    console.log(Number.isFinite(11/4))//true
+    console.log(Number.isFinite(Infinity))//false
+    console.log(typeof(Infinity))//number
 //检测是否是整数int
-console.log(Number.isInteger(111))//true
-console.log(Number.isInteger(Math.PI))//false
-console.log(Number.isInteger(Infinity))//false
+    console.log(Number.isInteger(111))//true
+    console.log(Number.isInteger(Math.PI))//false
+    console.log(Number.isInteger(Infinity))//false
 //最大安全整数,安全整数的意思是在此范围内可以精确表示,IEEE754双精确浮点数定义
-//letnumber2=Math.pow(2,53)-1//最大安全整数
-letnumber2=Number.MAX_SAFE_INTEGER
-console.log(number2)////9007199254740991
-console.log(Number.isSafeInteger(number2+1))//false
-console.log(Number.isInteger(number2+1))//true
+    //letnumber2=Math.pow(2,53)-1//最大安全整数
+    letnumber2=Number.MAX_SAFE_INTEGER
+    console.log(number2)////9007199254740991
+    console.log(Number.isSafeInteger(number2+1))//false
+    console.log(Number.isInteger(number2+1))//true
+
+## 6.数组操作
+// json对象的数组格式转化为数组 Array.from
+    let arr=Array.from(json)
+// 将文本和变量转换成数组 Array.of    
+    let txt='2'
+    let arr1=Array.of(txt,txt,txt,txt);
+    console.log(arr1)//["2", "2", "2", "2"]
+// find()实例方法,实例方法就是调用挂载在数组实例下的方法
+    let arr=[1,2,3,4,5,6]
+    console.log(arr.find(function(value,index,arr){//当前值,当前值的索引,当前数组
+        return value>3//匹配到第一个就返回并中止
+    }))// 4
+// 数组循环 for...of
+    let arr5=[1,2,3,4,5,6]
+    for(let [index,val] of arr5.entries()){
+        console.log(index+":"+val)//0:1 ... 5:6
+    }
+    let list=arr5.entries()
+    console.log(list);//Array Iterator {}
+    console.log(list.next().value)//[0, 1]
+    console.log(list.next().value)//[1, 2]
+// for of 与 for in的区别
+    for in遍历的是数组的索引（即键名），而for of遍历的是数组元素值
+    for in通常用来遍历对象的键名,可以遍历到原型属性method和索引name
+    for of遍历的只是数组内的元素,更为简单效率
+
 
 
 

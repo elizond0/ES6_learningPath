@@ -1,7 +1,5 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 // 2.变量的解构赋值
@@ -136,22 +134,88 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 {
     // 二进制声明 Binary
     var binary = 21;
-    console.log(binary); //21
+    // console.log(binary)//21
     // 八进制 Octal
     var octal = 438;
-    console.log(octal); //438
+    // console.log(octal)//438
     // 检测是否是有穷数,除了infinity,以外的所有数字,与全局的isFinite相比,不会强制转换
-    console.log(Number.isFinite(11 / 4)); //true
-    console.log(Number.isFinite(Infinity)); //false
-    console.log(typeof Infinity === 'undefined' ? 'undefined' : _typeof(Infinity)); //number
+    // console.log(Number.isFinite(11/4))//true
+    // console.log(Number.isFinite(Infinity))//false
+    // console.log(typeof(Infinity))//number
     // 检测是否是整数 int
-    console.log(Number.isInteger(111)); // true
-    console.log(Number.isInteger(Math.PI)); // false
-    console.log(Number.isInteger(Infinity)); // false
+    // console.log(Number.isInteger(111))// true
+    // console.log(Number.isInteger(Math.PI))// false
+    // console.log(Number.isInteger(Infinity))// false
     // 最大安全整数,安全整数的意思是在此范围内可以精确表示,IEEE754双精确浮点数定义
-    // let number2=Math.pow(2,53)-1
+    // let number2=Math.pow(2,53)-1 //最大安全整数
     var number2 = Number.MAX_SAFE_INTEGER;
-    console.log(number2); ////9007199254740991
-    console.log(Number.isSafeInteger(number2 + 1));
-    console.log(Number.isInteger(number2 + 1));
+    // console.log(number2)////9007199254740991
+    // console.log(Number.isSafeInteger(number2+1))//false
+    // console.log(Number.isInteger(number2+1))//true
+}
+
+// 数组
+{
+    // json数组格式
+    var json = {
+        '0': 'abc',
+        '1': 'def',
+        '2': 'ghi',
+        length: 3 //length是json数组格式必备的元素
+
+        // json对象的数组格式转化为数组 Array.from
+    };var arr = Array.from(json);
+    console.log(json); //默认是对象
+    console.log(arr); //转成了数组["abc", "def", "ghi"]
+    // 将文本和变量转换成数组 Array.of
+    var txt = '2';
+    var _arr3 = Array.of(txt, txt, txt, txt);
+    console.log(_arr3); //["2", "2", "2", "2"]
+    var txt2 = '2,2,2,2';
+    var _arr4 = txt2.split(',');
+    console.log(_arr4); //["2", "2", "2", "2"]
+    // 数组的实例方法,实例方法就是调用挂载在数组实例下的方法
+    // find() 查找
+    var arr3 = [1, 2, 3, 4, 5, 6];
+    console.log(arr3.find(function (value, index, arr) {
+        //当前值,当前值的索引,当前数组
+        return value > 3; //匹配到第一个就返回并中止
+    })); // 4
+    // fill() 可以替换多个项 参数:要替换的元素,开始的位置,结束的位置 
+    var arr4 = [1, 2, 3, 4, 5, 6];
+    arr4.fill('100', 2, -1);
+    console.log(arr4); //[1, 2, "100", "100", "100", 6]
+    // 数组循环 for...of
+    var arr5 = [1, 2, 3, 4, 5, 6];
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+        for (var _iterator2 = arr5.entries()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var _step2$value = _slicedToArray(_step2.value, 2),
+                index = _step2$value[0],
+                val = _step2$value[1];
+
+            console.log(index + ":" + val); //0:1 ... 5:6
+        }
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
+            }
+        } finally {
+            if (_didIteratorError2) {
+                throw _iteratorError2;
+            }
+        }
+    }
+
+    var list = arr5.entries();
+    console.log(list); //Array Iterator {}
+    console.log(list.next().value); //[0, 1]
+    console.log(list.next().value); //[1, 2]
 }
