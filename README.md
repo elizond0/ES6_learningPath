@@ -47,3 +47,8 @@ function test2(a,...arg){
 }
 test2(1,2,3,4,5,6,7,8,9,0)
 
+## 4.字符串模版
+在``内使用${key}进行传入变量,变量可以计算,文本可以使用标签,拼接可以换行
+`<b>text2</b>+${text1}+<small style='color:red'>text2</small>+${number1+10}`
+字符串查找:text.includes(txt),返回t/f表示是否包含,text.startsWith(txt)查找开头,text.endsWith(txt)查找结尾
+字符串重复:text.repeat(number),number表示次数

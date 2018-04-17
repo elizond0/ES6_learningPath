@@ -61,49 +61,44 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 // 3.扩展运算符和rest运算符
 // 对象扩展运算符
 function test1() {
-    var _console;
-
-    console.log("" + (arguments.length <= 0 ? undefined : arguments[0]) + (arguments.length <= 1 ? undefined : arguments[1]) + (arguments.length <= 2 ? undefined : arguments[2]) + (arguments.length <= 3 ? undefined : arguments[3])); //123undefined
-    (_console = console).log.apply(_console, arguments); //1 2 3
+    // console.log(""+arg[0]+arg[1]+arg[2]+arg[3]);//123undefined
+    // console.log(...arg);//1 2 3
 }
 test1(1, 2, 3);
 // 断开数组引用
 {
     var arr1 = [1, 2, 3];
     var arr2 = arr1;
-    console.log(arr2); //[1, 2, 3]
+    // console.log(arr2)//[1, 2, 3]
     arr2.push(4);
-    console.log(arr1); //[1, 2, 3, 4]
-}
-{
+    // console.log(arr1)//[1, 2, 3, 4]
+}{
     var _arr = [1, 2, 3];
     // let arr2=arr1.concat()
     // let arr2=arr1.slice()
     var _arr2 = [].concat(_arr);
-    console.log(_arr2); //[1, 2, 3]
+    // console.log(arr2)//[1, 2, 3]
     _arr2.push(4);
-    console.log(_arr); //[1, 2, 3]
+    // console.log(arr1)//[1, 2, 3]
 }
 
 // rest运算符
 function test2(a) {
-    var _console2;
-
     for (var _len = arguments.length, arg = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         arg[_key - 1] = arguments[_key];
     }
 
-    console.log(arg.length); // 9
-    (_console2 = console).log.apply(_console2, arg); //2 3 4 5 6 7 8 9 0
+    // console.log(arg.length)// 9
+    // console.log(...arg)//2 3 4 5 6 7 8 9 0
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
 
     try {
         for (var _iterator = arg[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var value = _step.value;
+            // console.log(value)//循环打印 2 3 4 5 6 7 8 9 0
 
-            console.log(value);
+            var value = _step.value;
         }
     } catch (err) {
         _didIteratorError = true;
@@ -121,3 +116,16 @@ function test2(a) {
     }
 }
 test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
+
+// 字符串模版
+{
+    var text = 'text';
+    var text1 = 'text1';
+    var number1 = 1000000;
+    var text2 = '<b>text2</b>+' + text1 + '+<small style=\'color:red\'>text2</small>+' + (number1 + 10);
+    document.write(text2);
+    // console.log(text2.includes(text)) //true
+    // console.log(text2.startsWith(text)) //false
+    // console.log(text2.endsWith(text)) //false
+    // console.log(text.repeat(3))//texttexttext
+}
