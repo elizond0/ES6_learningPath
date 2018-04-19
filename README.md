@@ -119,11 +119,29 @@ test2(1,2,3,4,5,6,7,8,9,0)
     fun1(...test2) //1 2 3
 
 ## 9.数组的遍历
-foreach:无法用break跳出
-filter:返回一个数组,数组内为匹配项(返回值为true的项)
-some:遍历项中有一个true返回true,所有都不满足返回false
-every:遍历项中有一个false就返回false,所有都不满足返回true
-map:遍历+替换,返回的是替换后的新数组,不影响原来的数组
+    foreach:无法用break跳出
+    filter:返回一个数组,数组内为匹配项(返回值为true的项)
+    some:遍历项中有一个true返回true,所有都不满足返回false
+    every:遍历项中有一个false就返回false,所有都不满足返回true
+    map:遍历+替换,返回的是替换后的新数组,不影响原来的数组
+
+## 10.对象
+    // 变量key值构建
+    let key = 'a'
+    let obj = {
+        [key]: '0'
+    }
+    // Object.is(obj1,obj2) 对象比较
+    console.log(+0 === -0); //true
+    console.log(NaN === NaN); //false
+    console.log(Object.is(+0, -0)); //false
+    console.log(Object.is(NaN, NaN)); //true
+    // Object.assign(a,b,c)合并对象
+    let a={a:'0'}
+    let b={b:'1'}
+    let c={c:'2'}
+    let d=Object.assign(a,b,c)
+    console.log(d)//{a: "0", b: "1", c: "2"}
 
 
 

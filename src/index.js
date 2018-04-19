@@ -194,7 +194,7 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
     // console.log(test4.length) //6
     // console.log(3 in test4) //false
 }
-// 遍历数组的几种方法
+// ## 9.数组的遍历
 {
     // foreach
     let arr = ['a', 'b', 'c']
@@ -215,4 +215,25 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
     //     return '0'
     // })) //['0', '0', '0', '0']
     // console.log(arr1)//["a", "b", "c", "d"]
+}
+
+// ## 10.对象
+{
+    // 变量key值构建
+    let key = 'a'
+    let obj = {
+        [key]: '0'
+    }
+    console.log(obj) //{a: "0"}
+    // Object.is(obj1,obj2) 对象比较
+    console.log(+0 === -0); //true
+    console.log(NaN === NaN); //false
+    console.log(Object.is(+0, -0)); //false
+    console.log(Object.is(NaN, NaN)); //true
+    // Object.assign(a,b,c)合并对象
+    let a={a:'0'}
+    let b={b:'1'}
+    let c={c:'2'}
+    let d=Object.assign(a,b,c)
+    console.log(d)//{a: "0", b: "1", c: "2"}
 }

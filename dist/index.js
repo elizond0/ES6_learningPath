@@ -2,6 +2,8 @@
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 // ## 2.变量的解构赋值(ES6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构。)
 // 简单例子
 {
@@ -264,7 +266,7 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     // console.log(test4.length) //6
     // console.log(3 in test4) //false
 }
-// 遍历数组的几种方法
+// ## 9.数组的遍历
 {
     // foreach
     var _arr5 = ['a', 'b', 'c'];
@@ -285,4 +287,23 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     //     return '0'
     // })) //['0', '0', '0', '0']
     // console.log(arr1)//["a", "b", "c", "d"]
+}
+
+// ## 10.对象
+{
+    // 变量key值构建
+    var key = 'a';
+    var obj = _defineProperty({}, key, '0');
+    console.log(obj); //{a: "0"}
+    // Object.is(obj1,obj2) 对象比较
+    console.log(+0 === -0); //true
+    console.log(NaN === NaN); //false
+    console.log(Object.is(+0, -0)); //false
+    console.log(Object.is(NaN, NaN)); //true
+    // Object.assign(a,b,c)合并对象
+    var _a = { a: '0' };
+    var _b = { b: '1' };
+    var _c = { c: '2' };
+    var _d = Object.assign(_a, _b, _c);
+    console.log(_d); //{a: "0", b: "1", c: "2"}
 }
