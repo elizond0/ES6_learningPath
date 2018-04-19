@@ -102,7 +102,28 @@ test2(1,2,3,4,5,6,7,8,9,0)
     }
     console.log(test(1))//2
 
+## 8.函数解构
+    let test1 = {
+        a: 'abc',
+        b: '123'
+    }
+    function fun({a,b}) { //参数名需要对应key值
+        console.log(a + b)
+    }
+    fun(test1) //abc123
+    // 数组的函数解构  
+    let test2 = [1, 2, 3]
+    function fun1(a, b, c) {
+        console.log(a, b, c)
+    }
+    fun1(...test2) //1 2 3
 
+## 9.数组的遍历
+foreach:无法用break跳出
+filter:返回一个数组,数组内为匹配项(返回值为true的项)
+some:遍历项中有一个true返回true,所有都不满足返回false
+every:遍历项中有一个false就返回false,所有都不满足返回true
+map:遍历+替换,返回的是替换后的数组
 
 
 
