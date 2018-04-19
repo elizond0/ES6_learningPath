@@ -230,15 +230,15 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 }
 // ## 8.函数解构
 {
-    var fun = function fun(_ref3) {
+    var fun = function fun(_ref3) {//参数名需要对应key值
+        // console.log(a + b)
+
         var a = _ref3.a,
             b = _ref3.b;
-        //参数名需要对应key值
-        console.log(a + b);
     };
 
     var fun1 = function fun1(a, b, c) {
-        console.log(a, b, c);
+        // console.log(a, b, c)
     };
 
     // 对象的函数解构 
@@ -257,32 +257,32 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     var test3 = {
         a: 'abc',
         b: '123'
-    };
-    console.log('a' in test3); //true
-    console.log('c' in test3); //false
-    // in 数组
-    var test4 = [1, 2, 3,,,,];
-    console.log(test4.length); //6
-    console.log(3 in test4); //false
+        // console.log('a' in test3) //true
+        // console.log('c' in test3) //false
+        // in 数组
+    };var test4 = [1, 2, 3,,,,];
+    // console.log(test4.length) //6
+    // console.log(3 in test4) //false
 }
 // 遍历数组的几种方法
 {
     // foreach
     var _arr5 = ['a', 'b', 'c'];
     _arr5.forEach(function (value, index) {
-        console.log(index, value); //0a,1b,2c
+        // console.log(index, value) //0a,1b,2c
     });
     // filter
     _arr5.filter(function (x) {
-        console.log(x); //a,b,c
+        // console.log(x) //a,b,c
     });
     // some
     _arr5.some(function (x) {
-        console.log(x); //a,b,c
+        // console.log(x) //a,b,c
     });
     // map 遍历+替换
     var _arr6 = ['a', 'b', 'c', 'd'];
-    console.log(_arr6.map(function (x) {
-        return '0';
-    })); //['0', '0', '0', '0']
+    // console.log(arr1.map(x => {
+    //     return '0'
+    // })) //['0', '0', '0', '0']
+    // console.log(arr1)//["a", "b", "c", "d"]
 }

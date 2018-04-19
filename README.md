@@ -123,7 +123,7 @@ foreach:无法用break跳出
 filter:返回一个数组,数组内为匹配项(返回值为true的项)
 some:遍历项中有一个true返回true,所有都不满足返回false
 every:遍历项中有一个false就返回false,所有都不满足返回true
-map:遍历+替换,返回的是替换后的数组
+map:遍历+替换,返回的是替换后的新数组,不影响原来的数组
 
 
 

@@ -171,14 +171,14 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
         a,
         b
     }) { //参数名需要对应key值
-        console.log(a + b)
+        // console.log(a + b)
     }
     fun(test1) //abc123
     // 数组的函数解构  
     let test2 = [1, 2, 3]
 
     function fun1(a, b, c) {
-        console.log(a, b, c)
+        // console.log(a, b, c)
     }
     fun1(...test2) //1 2 3
     // in 在数组和对象的新特性
@@ -187,31 +187,32 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
         a: 'abc',
         b: '123'
     }
-    console.log('a' in test3) //true
-    console.log('c' in test3) //false
+    // console.log('a' in test3) //true
+    // console.log('c' in test3) //false
     // in 数组
     let test4 = [1, 2, 3, , , , ]
-    console.log(test4.length) //6
-    console.log(3 in test4) //false
+    // console.log(test4.length) //6
+    // console.log(3 in test4) //false
 }
 // 遍历数组的几种方法
 {
     // foreach
     let arr = ['a', 'b', 'c']
     arr.forEach((value, index) => {
-        console.log(index, value) //0a,1b,2c
+        // console.log(index, value) //0a,1b,2c
     })
     // filter
     arr.filter(x => {
-        console.log(x) //a,b,c
+        // console.log(x) //a,b,c
     })
     // some
     arr.some(x => {
-        console.log(x) //a,b,c
+        // console.log(x) //a,b,c
     })
     // map 遍历+替换
     let arr1 = ['a', 'b', 'c', 'd']
-    console.log(arr1.map(x => {
-        return '0'
-    })) //['0', '0', '0', '0']
+    // console.log(arr1.map(x => {
+    //     return '0'
+    // })) //['0', '0', '0', '0']
+    // console.log(arr1)//["a", "b", "c", "d"]
 }
