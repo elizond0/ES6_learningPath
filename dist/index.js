@@ -1,5 +1,7 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -294,16 +296,41 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     // 变量key值构建
     var key = 'a';
     var obj = _defineProperty({}, key, '0');
-    console.log(obj); //{a: "0"}
+    // console.log(obj) //{a: "0"}
     // Object.is(obj1,obj2) 对象比较
-    console.log(+0 === -0); //true
-    console.log(NaN === NaN); //false
-    console.log(Object.is(+0, -0)); //false
-    console.log(Object.is(NaN, NaN)); //true
+    // console.log(+0 === -0); //true
+    // console.log(NaN === NaN); //false
+    // console.log(Object.is(+0, -0)); //false
+    // console.log(Object.is(NaN, NaN)); //true
     // Object.assign(a,b,c)合并对象
-    var _a = { a: '0' };
-    var _b = { b: '1' };
-    var _c = { c: '2' };
+    var _a = {
+        a: '0'
+    };
+    var _b = {
+        b: '1'
+    };
+    var _c = {
+        c: '2'
+    };
     var _d = Object.assign(_a, _b, _c);
-    console.log(_d); //{a: "0", b: "1", c: "2"}
+    // console.log(d)//{a: "0", b: "1", c: "2"}
+}
+
+// ## 11.全局标记Symbol
+{
+    // 声明
+    var _test3 = Symbol('abc');
+    console.log(typeof _test3 === 'undefined' ? 'undefined' : _typeof(_test3));
+    console.log(_test3); //Symbol(abc)
+    console.log(_test3.toString()); //Symbol(abc)
+    // 保护对象的元素
+    var _obj2 = {
+        name: 'abc'
+    };
+    var age = Symbol('age');
+    _obj2[age] = 18;
+    for (var item in _obj2) {
+        console.log(_obj2[item]); //abc
+    }
+    console.log(_obj2); //{name: "abc", Symbol(): 18}
 }

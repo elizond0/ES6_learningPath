@@ -224,16 +224,41 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
     let obj = {
         [key]: '0'
     }
-    console.log(obj) //{a: "0"}
+    // console.log(obj) //{a: "0"}
     // Object.is(obj1,obj2) 对象比较
-    console.log(+0 === -0); //true
-    console.log(NaN === NaN); //false
-    console.log(Object.is(+0, -0)); //false
-    console.log(Object.is(NaN, NaN)); //true
+    // console.log(+0 === -0); //true
+    // console.log(NaN === NaN); //false
+    // console.log(Object.is(+0, -0)); //false
+    // console.log(Object.is(NaN, NaN)); //true
     // Object.assign(a,b,c)合并对象
-    let a={a:'0'}
-    let b={b:'1'}
-    let c={c:'2'}
-    let d=Object.assign(a,b,c)
-    console.log(d)//{a: "0", b: "1", c: "2"}
+    let a = {
+        a: '0'
+    }
+    let b = {
+        b: '1'
+    }
+    let c = {
+        c: '2'
+    }
+    let d = Object.assign(a, b, c)
+    // console.log(d)//{a: "0", b: "1", c: "2"}
+}
+
+// ## 11.全局标记Symbol
+{
+    // 声明
+    let test = Symbol('abc');
+    console.log(typeof (test));
+    console.log(test) //Symbol(abc)
+    console.log(test.toString()) //Symbol(abc)
+    // 保护对象的元素
+    let obj = {
+        name: 'abc'
+    };
+    let age = Symbol('age');
+    obj[age] = 18;
+    for (let item in obj) {
+        console.log(obj[item]);//abc
+    }
+    console.log(obj);//{name: "abc", Symbol(age): 18}
 }

@@ -143,7 +143,11 @@ test2(1,2,3,4,5,6,7,8,9,0)
     let d=Object.assign(a,b,c)
     console.log(d)//{a: "0", b: "1", c: "2"}
 
-
+## 11.全局标记Symbol
+Symbol是ES6新增的数据类型,全局原始数据
+    // 声明
+    let test= Symbol('abc');
+    console.log(test)//Symbol(abc)
 
 
 
