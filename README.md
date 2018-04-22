@@ -1,6 +1,6 @@
 # ES6_learningPath
 
-## 0.参考文献:MDN+ECMAScript 6 入门(http://http://es6.ruanyifeng.com/)
+## 0.参考文献:[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript) + [ECMAScript 6 入门](http://http://es6.ruanyifeng.com/)
 
 ## 1.安装babel 全局+本地
 $ npm install -g babel-cli
