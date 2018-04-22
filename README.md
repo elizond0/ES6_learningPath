@@ -1,6 +1,6 @@
 # ES6_learningPath
 
-## 0.参考文献:[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript) + [ECMAScript 6 入门](http://http://es6.ruanyifeng.com/)
+## 0.参考文档:[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript) + [ECMAScript 6 入门](http://http://es6.ruanyifeng.com/) + [相关博客](http://jspang.com/2017/06/03/es6/)
 
 ## 1.安装babel 全局+本地
 $ npm install -g babel-cli
@@ -188,7 +188,7 @@ set:function(target,key,value,receiver) {//拦截对象属性的设置:value-要
     //set在严格模式下,return false将引发TypeError异常
 apply的作用是调用内部的方法，它使用在方法体是一个匿名函数时。
 
-
+## 15.promise对象
 
 
 
