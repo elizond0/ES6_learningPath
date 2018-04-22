@@ -160,7 +160,23 @@ WeakSet在new的时候不允许赋值,只能通过add添加
 同样不允许有重复的对象,但是存储的是引用对象,而不是值判断
     let setArr2=new WeakSet
     setArr2.add({'a':'1'})
+    setArr.delete('a')
+    setArr.clear()
 
+## 14.数据结构-map
+通常json对象key值查找的效率低于数组和map数据结构
+map数据结构的key值也可以是对象
+map的效率和灵活性更好
+    let mapObj=new Map()
+    let json={'id':'qweasdzxc','name':'abc'}
+    mapObj.set(json,'a')
+    mapObj.set('b',json)
+    console.log(mapObj)//{{id: "qweasdzxc", name: "abc"} => 'a', "age" => {'b': "qweasdzxc", name: "abc"}}
+    console.log(mapObj.get(json))// 'a'
+    mapObj.delete(json)
+    console.log(mapObj.size)// 1
+    console.log(mapObj.has('b'))// true
+    mapObj.clear()
 
 
 

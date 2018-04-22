@@ -339,16 +339,16 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 // 虽然Set很像数组，但是他不是数组。
 {
     var setArr = new Set(['a', 'b', 'c']);
-    console.log(setArr); //Set(3) {"a", "b", "c"}
+    // console.log(setArr)//Set(3) {"a", "b", "c"}
     setArr.add('b');
     setArr.add('e');
     setArr.delete('a');
-    console.log(setArr); //Set(3) {"b", "c", "e"}
-    console.log(setArr.size); //3
-    console.log(setArr.has('e')); //true
-    console.log(setArr.has('a')); //false
+    // console.log(setArr)//Set(3) {"b", "c", "e"}
+    // console.log(setArr.size);//3
+    // console.log(setArr.has('e'))//true
+    // console.log(setArr.has('a'))//false
     setArr.clear();
-    console.log(setArr); //Set(0) {}
+    // console.log(setArr)//Set(0) {}
 }
 
 // ## 13.数据结构-WeakSet
@@ -357,5 +357,24 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 {
     var setArr2 = new WeakSet();
     setArr2.add({ 'a': '1' });
-    console.log(setArr2); //
+    // console.log(setArr2)//WeakSet {{'a':'1'}}
+}
+
+// ## 14.数据结构-map
+// 通常json对象key值查找的效率低于数组和map数据结构
+// map数据结构的key值也可以是对象
+// map的效率和灵活性更好
+{
+    var mapObj = new Map();
+    var _json = { 'id': 'qweasdzxc', 'name': 'abc' };
+    mapObj.set(_json, 'a');
+    mapObj.set('b', _json);
+    console.log(mapObj); // Map(2) {{id: "qweasdzxc", name: "abc"} => 'a', "age" => {'b': "qweasdzxc", name: "abc"}}
+    console.log(mapObj.get(_json)); // 'a'
+    mapObj.delete(_json);
+    console.log(mapObj); // Map(1) {"age" => {'b': "qweasdzxc", name: "abc"}}
+    console.log(mapObj.size); // 1
+    console.log(mapObj.has('b')); // true
+    mapObj.clear();
+    console.log(mapObj); // Map(0) {}
 }
