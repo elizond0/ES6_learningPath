@@ -1,7 +1,5 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -320,17 +318,44 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 {
     // 声明
     var _test3 = Symbol('abc');
-    console.log(typeof _test3 === 'undefined' ? 'undefined' : _typeof(_test3));
-    console.log(_test3); //Symbol(abc)
-    console.log(_test3.toString()); //Symbol(abc)
+    // console.log(typeof (test));
+    // console.log(test) //Symbol(abc)
+    // console.log(test.toString()) //Symbol(abc)
     // 保护对象的元素
     var _obj2 = {
         name: 'abc'
     };
     var age = Symbol('age');
     _obj2[age] = 18;
-    for (var item in _obj2) {
-        console.log(_obj2[item]); //abc
-    }
-    console.log(_obj2); //{name: "abc", Symbol(): 18}
+    // for (let item in obj) {
+    //     console.log(obj[item]);//abc
+    // }
+    // console.log(obj);//{name: "abc", Symbol(age): 18}
+}
+
+// ## 12.数据结构-Set
+// Set的数据结构是以数组的形式构建的。
+// Set不允许内部有重复的值，如果有只显示一个，相当于去重。
+// 虽然Set很像数组，但是他不是数组。
+{
+    var setArr = new Set(['a', 'b', 'c']);
+    console.log(setArr); //Set(3) {"a", "b", "c"}
+    setArr.add('b');
+    setArr.add('e');
+    setArr.delete('a');
+    console.log(setArr); //Set(3) {"b", "c", "e"}
+    console.log(setArr.size); //3
+    console.log(setArr.has('e')); //true
+    console.log(setArr.has('a')); //false
+    setArr.clear();
+    console.log(setArr); //Set(0) {}
+}
+
+// ## 13.数据结构-WeakSet
+// WeakSet在new的时候不允许赋值,只能通过add添加
+// 同样不允许有重复的对象,但是存储的是引用对象(内存空间),而不是值判断
+{
+    var setArr2 = new WeakSet();
+    setArr2.add({ 'a': '1' });
+    console.log(setArr2); //
 }

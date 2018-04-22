@@ -149,6 +149,17 @@ Symbol是ES6新增的数据类型,全局原始数据
     let test= Symbol('abc');
     console.log(test)//Symbol(abc)
 
+## 12.数据结构-Set
+Set的数据结构是以数组的形式构建的。
+Set不允许内部有重复的值，如果有只显示一个，相当于去重。
+虽然Set很像数组，但是他不是数组。
+    let setArr = new Set(['a','b','c']);
+
+## 13.数据结构-WeakSet
+WeakSet在new的时候不允许赋值,只能通过add添加
+同样不允许有重复的对象,但是存储的是引用对象,而不是值判断
+    let setArr2=new WeakSet
+    setArr2.add({'a':'1'})
 
 
 
