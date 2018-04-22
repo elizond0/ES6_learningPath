@@ -178,7 +178,13 @@ map的效率和灵活性更好
     console.log(mapObj.has('b'))// true
     mapObj.clear()
 
-
+## 15.Proxy代理
+增强对象和函数的生命周期(钩子函数)
+get:function(target,key,property){//拦截对象属性的读取:target-目标对象,key-要设置的属性的名称
+set:function(target,key,value,receiver) {//拦截对象属性的设置:value-要设置的属性的新值,receiver-最初指向的对象
+    //receiver通常是代理本身。但是set处理程序也可以通过原型链或各种其他方式间接调用。
+    //set在严格模式下,return false将引发TypeError异常
+apply的作用是调用内部的方法，它使用在方法体是一个匿名函数时。
 
 
 

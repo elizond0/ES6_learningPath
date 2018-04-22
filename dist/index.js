@@ -369,12 +369,58 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     var _json = { 'id': 'qweasdzxc', 'name': 'abc' };
     mapObj.set(_json, 'a');
     mapObj.set('b', _json);
-    console.log(mapObj); // Map(2) {{id: "qweasdzxc", name: "abc"} => 'a', "age" => {'b': "qweasdzxc", name: "abc"}}
-    console.log(mapObj.get(_json)); // 'a'
+    // console.log(mapObj)// Map(2) {{id: "qweasdzxc", name: "abc"} => 'a', "age" => {'b': "qweasdzxc", name: "abc"}}
+    // console.log(mapObj.get(json))// 'a'
     mapObj.delete(_json);
-    console.log(mapObj); // Map(1) {"age" => {'b': "qweasdzxc", name: "abc"}}
-    console.log(mapObj.size); // 1
-    console.log(mapObj.has('b')); // true
+    // console.log(mapObj)// Map(1) {"age" => {'b': "qweasdzxc", name: "abc"}}
+    // console.log(mapObj.size)// 1
+    // console.log(mapObj.has('b'))// true
     mapObj.clear();
-    console.log(mapObj); // Map(0) {}
+    // console.log(mapObj)// Map(0) {}
+}
+
+// ## 15.Proxy代理
+// 增强对象和函数的生命周期(钩子函数)
+{
+    // 声明Proxy 第一个参数是对象本体,第二个参数是钩子函数
+    var _obj3 = new Proxy({
+        add: function add(num) {
+            return num++;
+        },
+        name: 'abc'
+    }, {
+        get: function get(target, key, property) {
+            //拦截对象属性的读取:target-目标对象,key-要设置的属性的名称
+            console.log('function get');
+            console.log(target); //{add: ƒ, name: "abc"}
+            console.log(key); //name
+            console.log(property); //Proxy {add: ƒ, name: "abc"}
+            return target[key];
+        },
+        set: function set(target, key, value, receiver) {
+            //拦截对象属性的设置:value-要设置的属性的新值,receiver-最初指向的对象
+            //receiver通常是代理本身。但是set处理程序也可以通过原型链或各种其他方式间接调用。
+            console.log('function set ' + key + '=' + value);
+            console.log(value);
+            console.log(receiver);
+            //set函数在严格模式下,return false将引发TypeError异常
+            // return true
+            return target[key] = value + '';
+        }
+    });
+    console.log(_obj3.name); //abc
+    _obj3.name = 'abcde';
+    console.log(_obj3.name); //abcde
+    // apply的作用是调用内部的方法，它使用在方法体是一个匿名函数时。
+    var target = function target() {
+        return 'apply-target';
+    };
+    var handler = {
+        apply: function apply(target, context, args) {
+            console.log('apply-handler');
+            return Reflect.apply.apply(Reflect, arguments);
+        }
+    };
+    var pro = new Proxy(target, handler);
+    console.log(pro());
 }
