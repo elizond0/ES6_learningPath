@@ -189,6 +189,38 @@ set:function(target,key,value,receiver) {//拦截对象属性的设置:value-要
 apply的作用是调用内部的方法，它使用在方法体是一个匿名函数时。
 
 ## 15.promise对象
+    // Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject,由 JavaScript 引擎提供，不用自己部署。
+    // resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
+    // reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+    // Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
+    let state = 0
+    const promise = new Promise(function (resolve, reject) {
+        // 状态码变更
+        state = 1
+        // 业务代码
+        // ...
+        //异步成功时(即成功改变状态码后)
+        if (state == 1) { 
+            resolve('success');
+        } else {
+            reject('failure');
+        }
+        // 注意，调用resolve或reject并不会终结 Promise 的参数函数的执行。
+        console.log('321')// 321
+        // 一般来说，调用resolve或reject以后，Promise 的使命就完成了，后继操作应该放到then方法里面.
+        // 而不应该直接写在resolve或reject的后面。所以，最好在它们前面加上return语句，这样就不会有意外。
+        return
+    })
+    // Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
+    // then方法可以接受两个回调函数作为参数,第一个回调函数是Promise对象的状态变为resolved时调用
+    // 第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的
+    promise.then(function (value) {
+        // success
+        console.log(value)
+    }, function (error) {
+        // failure
+        console.log(error)
+    });
 
 
 

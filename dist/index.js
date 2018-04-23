@@ -356,7 +356,9 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 // 同样不允许有重复的对象,但是存储的是引用对象(内存空间),而不是值判断
 {
     var setArr2 = new WeakSet();
-    setArr2.add({ 'a': '1' });
+    setArr2.add({
+        'a': '1'
+    });
     // console.log(setArr2)//WeakSet {{'a':'1'}}
 }
 
@@ -366,7 +368,10 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 // map的效率和灵活性更好
 {
     var mapObj = new Map();
-    var _json = { 'id': 'qweasdzxc', 'name': 'abc' };
+    var _json = {
+        'id': 'qweasdzxc',
+        'name': 'abc'
+    };
     mapObj.set(_json, 'a');
     mapObj.set('b', _json);
     // console.log(mapObj)// Map(2) {{id: "qweasdzxc", name: "abc"} => 'a', "age" => {'b': "qweasdzxc", name: "abc"}}
@@ -391,36 +396,72 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     }, {
         get: function get(target, key, property) {
             //拦截对象属性的读取:target-目标对象,key-要设置的属性的名称
-            console.log('function get');
-            console.log(target); //{add: ƒ, name: "abc"}
-            console.log(key); //name
-            console.log(property); //Proxy {add: ƒ, name: "abc"}
+            // console.log('function get')
+            // console.log(target)//{add: ƒ, name: "abc"}
+            // console.log(key)//name
+            // console.log(property)//Proxy {add: ƒ, name: "abc"}
             return target[key];
         },
         set: function set(target, key, value, receiver) {
             //拦截对象属性的设置:value-要设置的属性的新值,receiver-最初指向的对象
             //receiver通常是代理本身。但是set处理程序也可以通过原型链或各种其他方式间接调用。
-            console.log('function set ' + key + '=' + value);
-            console.log(value);
-            console.log(receiver);
+            // console.log(`function set ${key}=${value}`)
+            // console.log(value)
+            // console.log(receiver)
             //set函数在严格模式下,return false将引发TypeError异常
             // return true
             return target[key] = value + '';
         }
     });
-    console.log(_obj3.name); //abc
+    // console.log(obj.name)//abc
     _obj3.name = 'abcde';
-    console.log(_obj3.name); //abcde
+    // console.log(obj.name)//abcde
     // apply的作用是调用内部的方法，它使用在方法体是一个匿名函数时。
     var target = function target() {
         return 'apply-target';
     };
     var handler = {
         apply: function apply(target, context, args) {
-            console.log('apply-handler');
+            // console.log('apply-handler');
             return Reflect.apply.apply(Reflect, arguments);
         }
     };
     var pro = new Proxy(target, handler);
-    console.log(pro());
+    // console.log(pro());
+}
+
+// ## 15.promise对象
+{
+    // Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject,由 JavaScript 引擎提供，不用自己部署。
+    // resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
+    // reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+    // Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
+    var state = 0;
+    var promise = new Promise(function (resolve, reject) {
+        // 状态码变更
+        state = 1;
+        // 业务代码
+        // ...
+        //异步成功时(即成功改变状态码后)
+        if (state == 1) {
+            resolve('success');
+        } else {
+            reject('failure');
+        }
+        // 注意，调用resolve或reject并不会终结 Promise 的参数函数的执行。
+        console.log('321'); // 321
+        // 一般来说，调用resolve或reject以后，Promise 的使命就完成了，后继操作应该放到then方法里面.
+        // 而不应该直接写在resolve或reject的后面。所以，最好在它们前面加上return语句，这样就不会有意外。
+        return;
+    });
+    // Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
+    // then方法可以接受两个回调函数作为参数,第一个回调函数是Promise对象的状态变为resolved时调用
+    // 第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的
+    promise.then(function (value) {
+        // success
+        console.log(value);
+    }, function (error) {
+        // failure
+        console.log(error);
+    });
 }
