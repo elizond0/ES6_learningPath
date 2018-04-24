@@ -188,11 +188,11 @@ set:function(target,key,value,receiver) {//拦截对象属性的设置:value-要
     //set在严格模式下,return false将引发TypeError异常
 apply的作用是调用内部的方法，它使用在方法体是一个匿名函数时。
 
-## 15.promise对象
-    // Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject,由 JavaScript 引擎提供，不用自己部署。
-    // resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
-    // reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
-    // Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
+## 16.promise对象
+// Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject,由 JavaScript 引擎提供，不用自己部署。
+// resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
+// reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+// Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
     let state = 0
     const promise = new Promise(function (resolve, reject) {
         // 状态码变更
@@ -221,6 +221,8 @@ apply的作用是调用内部的方法，它使用在方法体是一个匿名函
         // failure
         console.log(error)
     });
+
+## 17.class
 
 
 

@@ -358,12 +358,12 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
     // console.log(pro());
 }
 
-// ## 15.promise对象
+// ## 16.promise对象
+// Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject,由 JavaScript 引擎提供，不用自己部署。
+// resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
+// reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+// Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
 {
-    // Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject,由 JavaScript 引擎提供，不用自己部署。
-    // resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
-    // reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
-    // Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
     let state = 0
     const promise = new Promise(function (resolve, reject) {
         // 状态码变更
@@ -371,13 +371,13 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
         // 业务代码
         // ...
         //异步成功时(即成功改变状态码后)
-        if (state == 1) { 
+        if (state == 1) {
             resolve('success');
         } else {
             reject('failure');
         }
         // 注意，调用resolve或reject并不会终结 Promise 的参数函数的执行。
-        console.log('321')// 321
+        // console.log('321')// 321
         // 一般来说，调用resolve或reject以后，Promise 的使命就完成了，后继操作应该放到then方法里面.
         // 而不应该直接写在resolve或reject的后面。所以，最好在它们前面加上return语句，这样就不会有意外。
         return
@@ -387,9 +387,85 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
     // 第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的
     promise.then(function (value) {
         // success
-        console.log(value)
+        // console.log(value)
     }, function (error) {
         // failure
-        console.log(error)
+        // console.log(error)
     });
+}
+
+// ## 17.class
+// 类不存在变量提升,ES6不支持私有方法和私有属性
+// 类的方法内部如果含有this，它默认指向类的实例,单独使用该方法会报错,可使用箭头函数解决
+{
+    // class类的声明
+    // class里声明的方法之间没有逗号分隔,与常见的对象方法不同 
+    // 同时方法内结尾处需要return出值,否则后续会出现undefined
+    class UserInfo {
+        name(value) {
+            console.log(value)
+            return value
+        }
+        age(value) {
+            console.log(value)
+            return value
+        }
+        showInfo(obj) {
+            console.log(obj.age)
+            console.log(`${this.name(obj.name)}:${this.age(obj.age)}`) //wokerB:40
+        }
+    }
+    // 实例化
+    let workerA = new UserInfo
+    workerA.name('workerA') //workerA
+    workerA.age(30) //30
+    let workerB = new UserInfo
+    workerB.showInfo({
+        name: 'wokerB',
+        age: 40
+    })
+    // class类的参数用constructor()进行传递,直接使用this.[key]进行调用
+    class Cpter {
+        constructor(a, b) {
+            this.a = a
+            this.b = b
+        }
+        add() {
+            return this.a + this.b
+        }
+    }
+    let cpter1 = new Cpter(1, 5)
+    console.log(cpter1.add()) //6
+    // Class 的静态方法
+    // 类相当于实例的原型，所有在类中定义的方法，都会被实例继承。
+    // 如果在一个方法前，加上static关键字，就表示该方法不会被实例继承
+    // 如果静态方法包含this关键字，这个this指的是类，而不是实例。
+    // 静态方法可以与非静态方法重名
+    class Test99 {
+        static hello() {
+            return 'hello';
+        }
+    }
+    console.log(Test99.hello()) // 'hello'
+    // let test99 = new Test99();
+    // console.log(test99.hello())// 报错 TypeError: test99.hello is not a function
+    // class类的继承
+    // 父类Cpter被子类ProCpter继承,静态方法也可以继承
+    class ProCpter extends Cpter {
+        // 如果子类没有定义constructor方法，这个方法会被默认添加
+        // constructor(...args) {
+        //     super(...args);
+        // }
+        constructor(a, b, c) {
+            super(a, b) //调用父类的constructor()
+            this.c = c //新增子类属性
+        }
+        minus() {
+            return this.a - this.b + this.c
+        }
+    }
+    let proCpter = new ProCpter(2, 5, 10)
+    console.log(proCpter.add()) // 7
+    console.log(proCpter.minus()) // 7
+
 }

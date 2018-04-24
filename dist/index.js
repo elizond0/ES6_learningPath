@@ -1,6 +1,14 @@
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -430,12 +438,12 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     // console.log(pro());
 }
 
-// ## 15.promise对象
+// ## 16.promise对象
+// Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject,由 JavaScript 引擎提供，不用自己部署。
+// resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
+// reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+// Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
 {
-    // Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject,由 JavaScript 引擎提供，不用自己部署。
-    // resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
-    // reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
-    // Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。
     var state = 0;
     var promise = new Promise(function (resolve, reject) {
         // 状态码变更
@@ -449,7 +457,7 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
             reject('failure');
         }
         // 注意，调用resolve或reject并不会终结 Promise 的参数函数的执行。
-        console.log('321'); // 321
+        // console.log('321')// 321
         // 一般来说，调用resolve或reject以后，Promise 的使命就完成了，后继操作应该放到then方法里面.
         // 而不应该直接写在resolve或reject的后面。所以，最好在它们前面加上return语句，这样就不会有意外。
         return;
@@ -459,9 +467,132 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     // 第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的
     promise.then(function (value) {
         // success
-        console.log(value);
+        // console.log(value)
     }, function (error) {
         // failure
-        console.log(error);
+        // console.log(error)
     });
+}
+
+// ## 17.class
+// 类不存在变量提升,ES6不支持私有方法和私有属性
+// 类的方法内部如果含有this，它默认指向类的实例,单独使用该方法会报错,可使用箭头函数解决
+{
+    // class类的声明
+    // class里声明的方法之间没有逗号分隔,与常见的对象方法不同 
+    // 同时方法内结尾处需要return出值,否则后续会出现undefined
+    var UserInfo = function () {
+        function UserInfo() {
+            _classCallCheck(this, UserInfo);
+        }
+
+        _createClass(UserInfo, [{
+            key: 'name',
+            value: function name(value) {
+                console.log(value);
+                return value;
+            }
+        }, {
+            key: 'age',
+            value: function age(value) {
+                console.log(value);
+                return value;
+            }
+        }, {
+            key: 'showInfo',
+            value: function showInfo(obj) {
+                console.log(obj.age);
+                console.log(this.name(obj.name) + ':' + this.age(obj.age)); //wokerB:40
+            }
+        }]);
+
+        return UserInfo;
+    }();
+    // 实例化
+
+
+    var workerA = new UserInfo();
+    workerA.name('workerA'); //workerA
+    workerA.age(30); //30
+    var workerB = new UserInfo();
+    workerB.showInfo({
+        name: 'wokerB',
+        age: 40
+    });
+    // class类的参数用constructor()进行传递,直接使用this.[key]进行调用
+
+    var Cpter = function () {
+        function Cpter(a, b) {
+            _classCallCheck(this, Cpter);
+
+            this.a = a;
+            this.b = b;
+        }
+
+        _createClass(Cpter, [{
+            key: 'add',
+            value: function add() {
+                return this.a + this.b;
+            }
+        }]);
+
+        return Cpter;
+    }();
+
+    var cpter1 = new Cpter(1, 5);
+    console.log(cpter1.add()); //6
+    // Class 的静态方法
+    // 类相当于实例的原型，所有在类中定义的方法，都会被实例继承。
+    // 如果在一个方法前，加上static关键字，就表示该方法不会被实例继承
+    // 如果静态方法包含this关键字，这个this指的是类，而不是实例。
+    // 静态方法可以与非静态方法重名
+
+    var Test99 = function () {
+        function Test99() {
+            _classCallCheck(this, Test99);
+        }
+
+        _createClass(Test99, null, [{
+            key: 'hello',
+            value: function hello() {
+                return 'hello';
+            }
+        }]);
+
+        return Test99;
+    }();
+
+    console.log(Test99.hello()); // 'hello'
+    // let test99 = new Test99();
+    // console.log(test99.hello())// 报错 TypeError: test99.hello is not a function
+    // class类的继承
+    // 父类Cpter被子类ProCpter继承,静态方法也可以继承
+
+    var ProCpter = function (_Cpter) {
+        _inherits(ProCpter, _Cpter);
+
+        function ProCpter() {
+            _classCallCheck(this, ProCpter);
+
+            return _possibleConstructorReturn(this, (ProCpter.__proto__ || Object.getPrototypeOf(ProCpter)).apply(this, arguments));
+        }
+
+        _createClass(ProCpter, [{
+            key: 'minus',
+
+            // constructor(a,b,c){
+            //     super(a,b)//调用父类的constructor()
+            //     this.c=c//新增子类属性
+            // }
+            value: function minus() {
+                return this.a - this.b;
+            }
+        }]);
+
+        return ProCpter;
+    }(Cpter);
+
+    var proCpter = new ProCpter(2, 5, 10);
+    console.log(proCpter.add()); // 7
+    console.log(proCpter.minus()); // 7
 }
