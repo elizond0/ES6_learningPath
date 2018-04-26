@@ -601,3 +601,61 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 }
 
 // ## 18.模块化
+// export:可存在多个,在导入时要加{}
+// export default只能有一个,则不需要{}
+// src文件夹下创建tmp.js,内容:export let name123 ='test'
+// index.js文件内引入
+// import {
+//     name1,
+//     name2,
+//     name3
+// } from './tmp'
+// console.log(`${name1}+${name2}+${name3}`) // 打印结果:test1+test2+test3
+// import str from './tmp'
+// console.log(str) // 打印结果:test4
+// 路径至\src>下 $ babel-node index.js
+
+// ## 19.async和await
+// async是异步的简写,是让方法变成异步,返回的是Promise对象
+// await是等待异步方法完成,可以接受表达式或者普通值
+// 注意的是await必须在async方法中才可以使用因为await访问本身就会造成程序停止堵塞，所以必须在异步方法中才可以使用。
+{
+    // async返回的是Promise对象
+    var testAsync = async function testAsync() {
+        return 'Hello async';
+    };
+
+    //Promise {<resolved>: "Hello async"}
+    var getSomething = function getSomething() {
+        return 'something';
+    };
+    // await必须在async方法中使用
+
+
+    var _test4 = async function _test4() {
+        var v1 = await getSomething(); //也可以是普通值
+        var v2 = await testAsync();
+        console.log(v1, v2); //something Hello async
+    };
+
+    // async/await同时使用的简单示例
+    var takeLongTime = async function takeLongTime() {
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                return resolve("long_time_value");
+            }, 1000);
+        });
+    };
+
+    var testA = async function testA() {
+        var v = await takeLongTime();
+        console.log(v);
+    };
+
+    var result = testAsync();
+    console.log(result);
+    _test4();
+    console.log('运行中');
+    testA(); //"long_time_value"
+    console.log('运行中');
+}
