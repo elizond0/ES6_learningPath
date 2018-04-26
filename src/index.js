@@ -403,16 +403,16 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
     // 同时方法内结尾处需要return出值,否则后续会出现undefined
     class UserInfo {
         name(value) {
-            console.log(value)
+            // console.log(value)
             return value
         }
         age(value) {
-            console.log(value)
+            // console.log(value)
             return value
         }
         showInfo(obj) {
-            console.log(obj.age)
-            console.log(`${this.name(obj.name)}:${this.age(obj.age)}`) //wokerB:40
+            // console.log(obj.age)
+            // console.log(`${this.name(obj.name)}:${this.age(obj.age)}`) //wokerB:40
         }
     }
     // 实例化
@@ -435,7 +435,7 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
         }
     }
     let cpter1 = new Cpter(1, 5)
-    console.log(cpter1.add()) //6
+    // console.log(cpter1.add()) //6
     // Class 的静态方法
     // 类相当于实例的原型，所有在类中定义的方法，都会被实例继承。
     // 如果在一个方法前，加上static关键字，就表示该方法不会被实例继承
@@ -446,7 +446,7 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
             return 'hello';
         }
     }
-    console.log(Test99.hello()) // 'hello'
+    // console.log(Test99.hello()) // 'hello'
     // let test99 = new Test99();
     // console.log(test99.hello())// 报错 TypeError: test99.hello is not a function
     // class类的继承
@@ -465,7 +465,21 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
         }
     }
     let proCpter = new ProCpter(2, 5, 10)
-    console.log(proCpter.add()) // 7
-    console.log(proCpter.minus()) // 7
-
+    // console.log(proCpter.add()) // 7
+    // console.log(proCpter.minus()) // 7
 }
+
+// ## 18.模块化
+// export:可存在多个,在导入时要加{}
+// export default只能有一个,则不需要{}
+// src文件夹下创建tmp.js,内容:export let name123 ='test'
+// index.js文件内引入
+// import {
+//     name1,
+//     name2,
+//     name3
+// } from './tmp'
+import str from './tmp'
+// console.log(`${name1}+${name2}+${name3}`) // 打印结果:test1+test2+test3
+console.log(str) // 打印结果:test4
+// 路径至\src>下 $ babel-node index.js

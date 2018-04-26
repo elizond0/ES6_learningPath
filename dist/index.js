@@ -489,20 +489,20 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
         _createClass(UserInfo, [{
             key: 'name',
             value: function name(value) {
-                console.log(value);
+                // console.log(value)
                 return value;
             }
         }, {
             key: 'age',
             value: function age(value) {
-                console.log(value);
+                // console.log(value)
                 return value;
             }
         }, {
             key: 'showInfo',
             value: function showInfo(obj) {
-                console.log(obj.age);
-                console.log(this.name(obj.name) + ':' + this.age(obj.age)); //wokerB:40
+                // console.log(obj.age)
+                // console.log(`${this.name(obj.name)}:${this.age(obj.age)}`) //wokerB:40
             }
         }]);
 
@@ -540,7 +540,7 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     }();
 
     var cpter1 = new Cpter(1, 5);
-    console.log(cpter1.add()); //6
+    // console.log(cpter1.add()) //6
     // Class 的静态方法
     // 类相当于实例的原型，所有在类中定义的方法，都会被实例继承。
     // 如果在一个方法前，加上static关键字，就表示该方法不会被实例继承
@@ -561,12 +561,12 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
 
         return Test99;
     }();
-
-    console.log(Test99.hello()); // 'hello'
+    // console.log(Test99.hello()) // 'hello'
     // let test99 = new Test99();
     // console.log(test99.hello())// 报错 TypeError: test99.hello is not a function
     // class类的继承
     // 父类Cpter被子类ProCpter继承,静态方法也可以继承
+
 
     var ProCpter = function (_Cpter) {
         _inherits(ProCpter, _Cpter);
@@ -596,6 +596,8 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     }(Cpter);
 
     var proCpter = new ProCpter(2, 5, 10);
-    console.log(proCpter.add()); // 7
-    console.log(proCpter.minus()); // 7
+    // console.log(proCpter.add()) // 7
+    // console.log(proCpter.minus()) // 7
 }
+
+// ## 18.模块化

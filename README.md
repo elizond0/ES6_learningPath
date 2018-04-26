@@ -295,7 +295,11 @@ apply的作用是调用内部的方法，它使用在方法体是一个匿名函
     console.log(proCpter.add()) // 7
     console.log(proCpter.minus()) // 7
 
-
+## 18.模块化
+export :负责进行模块化，也是模块的输出。
+import : 负责把模块引，也是模块的引入操作。
+// export:可存在多个,在导入时要加{}
+// export default只能有一个,则不需要{}
 
 
 
