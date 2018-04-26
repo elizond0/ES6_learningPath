@@ -223,6 +223,78 @@ apply的作用是调用内部的方法，它使用在方法体是一个匿名函
     });
 
 ## 17.class
+// 类不存在变量提升,ES6不支持私有方法和私有属性
+// 类的方法内部如果含有this，它默认指向类的实例,单独使用该方法会报错,可使用箭头函数解决
+    // class类的声明
+    // class里声明的方法之间没有逗号分隔,与常见的对象方法不同 
+    // 同时方法内结尾处需要return出值,否则后续会出现undefined
+        class UserInfo {
+        name(value) {
+            console.log(value)
+            return value
+        }
+        age(value) {
+            console.log(value)
+            return value
+        }
+        showInfo(obj) {
+            console.log(obj.age)
+            console.log(`${this.name(obj.name)}:${this.age(obj.age)}`) //wokerB:40
+        }
+    }
+    // 实例化
+    let workerA = new UserInfo
+    workerA.name('workerA') //workerA
+    workerA.age(30) //30
+    let workerB = new UserInfo
+    workerB.showInfo({
+        name: 'wokerB',
+        age: 40
+    })
+    // class类的参数用constructor()进行传递,直接使用this.[key]进行调用
+    class Cpter {
+        constructor(a, b) {
+            this.a = a
+            this.b = b
+        }
+        add() {
+            return this.a + this.b
+        }
+    }
+    let cpter1 = new Cpter(1, 5)
+    console.log(cpter1.add()) //6
+    // Class 的静态方法
+    // 类相当于实例的原型，所有在类中定义的方法，都会被实例继承。
+    // 如果在一个方法前，加上static关键字，就表示该方法不会被实例继承
+    // 如果静态方法包含this关键字，这个this指的是类，而不是实例。
+    // 静态方法可以与非静态方法重名
+    class Test99 {
+        static hello() {
+            return 'hello';
+        }
+    }
+    console.log(Test99.hello()) // 'hello'
+    // let test99 = new Test99();
+    // console.log(test99.hello())// 报错 TypeError: test99.hello is not a function
+    // class类的继承
+    // 父类Cpter被子类ProCpter继承,静态方法也可以继承
+    class ProCpter extends Cpter {
+        // 如果子类没有定义constructor方法，这个方法会被默认添加
+        // constructor(...args) {
+        //     super(...args);
+        // }
+        constructor(a, b, c) {
+            super(a, b) //调用父类的constructor()
+            this.c = c //新增子类属性
+        }
+        minus() {
+            return this.a - this.b + this.c
+        }
+    }
+    let proCpter = new ProCpter(2, 5, 10)
+    console.log(proCpter.add()) // 7
+    console.log(proCpter.minus()) // 7
+
 
 
 

@@ -571,21 +571,24 @@ test2(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
     var ProCpter = function (_Cpter) {
         _inherits(ProCpter, _Cpter);
 
-        function ProCpter() {
+        // 如果子类没有定义constructor方法，这个方法会被默认添加
+        // constructor(...args) {
+        //     super(...args);
+        // }
+        function ProCpter(a, b, c) {
             _classCallCheck(this, ProCpter);
 
-            return _possibleConstructorReturn(this, (ProCpter.__proto__ || Object.getPrototypeOf(ProCpter)).apply(this, arguments));
+            //调用父类的constructor()
+            var _this = _possibleConstructorReturn(this, (ProCpter.__proto__ || Object.getPrototypeOf(ProCpter)).call(this, a, b));
+
+            _this.c = c; //新增子类属性
+            return _this;
         }
 
         _createClass(ProCpter, [{
             key: 'minus',
-
-            // constructor(a,b,c){
-            //     super(a,b)//调用父类的constructor()
-            //     this.c=c//新增子类属性
-            // }
             value: function minus() {
-                return this.a - this.b;
+                return this.a - this.b + this.c;
             }
         }]);
 
